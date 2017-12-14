@@ -1,27 +1,50 @@
 #include <iostream>
 #include <random>
-#include <set>
 #include <sstream>
 #include <cctype>
+#include <vector>
+#include <locale>	// Convert characters to uppercase.
 using namespace std;
 
 const string QUIT = "QUIT";
-set<string> OPTIONS = {"ROCK", "PAPER", "SCISSORS"};
+const enum rpsChoice { Rock, Paper, Scissors };
+const vector<rpsChoice> rpsCompare = { Rock, Paper, Scissors };
 
+// Prompts a user to choose from rock, papers, or scissors;
 void prompt(string &input) {
+	// Ask for user to pick from rock, papers, scissors.
 	cout << "Pick rock, paper, or scissor. (Type your choice)" << endl;
+
+	// Add that QUIT needs to be typed to quit game.
 	cout << "Type 'QUIT' to quit game." << endl;
 	getline(cin, input); cout << endl << endl;
 }
 
+
+// Converts a string to uppercase.
 string toUpper(string s) {
-	string toReturn;
-
-	for (int i = 0; i < s.length; i++)
+	// Initiate the string to be returned.
+	string toReturn = ""; 
+	
+	for each (char ch in s)
 	{
-
+		// Convert each character to uppercase.
+		toReturn += toupper(ch);
 	}
-	return s;
+	
+	return toReturn;
+}
+
+// Converts a string to an RPS choice.
+rpsChoice toRPS(string S) {
+	if (S == "ROCK") return Rock;
+	if (S == "PAPER") return Paper;
+	if (S == "SCISSORS") return Scissors;
+
+	else
+	{
+		throw exception("S is not an RPS choice.");
+	}
 }
 
 int main() {
@@ -33,9 +56,6 @@ int main() {
 
 	}
 	
-	// Ask for user to pick from rock, papers, scissors.
-	// Add that QUIT needs to be typed to quit game.
-
 	// Repeat Q if user does not pick one of three.
 
 	// Get computer to select from RPS
